@@ -41,11 +41,6 @@ prompt box, then Plugins, Add marketplace with `ConradStack/chat-outline`,
 then Add plugin. A mod installed from a terminal at the user scope also loads
 in the desktop app's local sessions.
 
-This repository is private. Installing works only for people who can read it
-on GitHub and whose machine already holds a git credential for github.com (an
-SSH key, or `gh auth login` then `gh auth setup-git`); the install never
-prompts for one.
-
 ## Loading from a local folder
 
 To run the mod from a checkout of this repository instead, for example while
