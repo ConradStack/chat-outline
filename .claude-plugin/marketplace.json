@@ -1,0 +1,6 @@
+{
+    "name": "chat-outline",
+    "description": "The chat-outline mod: an outline pane listing each prompt of the conversation",
+    "owner": { "name": "ConradStack" },
+    "plugins": [{ "name": "chat-outline", "source": "./" }]
+}

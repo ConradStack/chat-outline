@@ -19,9 +19,37 @@ Only your own prompts are listed. Claude's replies, tool results, slash
 command records, background task notifications and system reminders are left
 out.
 
-## Loading the mod
+## Installing
 
-The mod is a plugin folder: this repository. Load it with either of these.
+At the prompt of a Claude Code terminal session:
+
+```
+/plugin install chat-outline --marketplace ConradStack/chat-outline
+```
+
+Or from a shell:
+
+```bash
+claude plugin install chat-outline --marketplace ConradStack/chat-outline
+```
+
+Answer `y` to add the marketplace, then pick a scope (the user scope loads
+the mod in every session you start after).
+
+In the Claude desktop app, where `/plugin` does not run: click + next to the
+prompt box, then Plugins, Add marketplace with `ConradStack/chat-outline`,
+then Add plugin. A mod installed from a terminal at the user scope also loads
+in the desktop app's local sessions.
+
+This repository is private. Installing works only for people who can read it
+on GitHub and whose machine already holds a git credential for github.com (an
+SSH key, or `gh auth login` then `gh auth setup-git`); the install never
+prompts for one.
+
+## Loading from a local folder
+
+To run the mod from a checkout of this repository instead, for example while
+changing it, load the folder with either of these.
 
 For a single terminal session:
 
@@ -89,6 +117,8 @@ number, the pane shows an error instead of the outline.
 
 - `.claude-plugin/plugin.json` - the manifest, including the `maxQueryChars`
   option
+- `.claude-plugin/marketplace.json` - makes this repository a marketplace
+  listing the mod, so it installs with one line
 - `hooks/hooks.json` - names the hooks module
 - `hooks/register.tsx` - the mod: the pane, the `/outline` command, and the
   hooks that refresh the pane
