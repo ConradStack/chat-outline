@@ -1,0 +1,15 @@
+{
+    "name": "chat-outline",
+    "version": "0.2.0",
+    "description": "Outline pane listing each prompt of the conversation, with its time",
+    "types": "./types/index.d.ts",
+    "userConfig": {
+        "maxQueryChars": {
+            "type": "number",
+            "title": "Max characters per prompt",
+            "description": "Prompts longer than this are cut off in the outline",
+            "default": 1000,
+            "min": 1
+        }
+    }
+}
