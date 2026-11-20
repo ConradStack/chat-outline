@@ -41,6 +41,16 @@ prompt box, then Plugins, Add marketplace with `ConradStack/chat-outline`,
 then Add plugin. A mod installed from a terminal at the user scope also loads
 in the desktop app's local sessions.
 
+## Updating
+
+To get the latest version of an installed copy, from a shell:
+
+```bash
+claude plugin update chat-outline@chat-outline
+```
+
+Then restart Claude Code to load the new version. Your settings are kept.
+
 ## Loading from a local folder
 
 To run the mod from a checkout of this repository instead, for example while

@@ -1,6 +1,6 @@
 {
     "name": "chat-outline",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Outline pane listing each prompt of the conversation, with its time",
     "types": "./types/index.d.ts",
     "userConfig": {
