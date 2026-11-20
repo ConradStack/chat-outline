@@ -140,7 +140,7 @@ so the error is seen).
 ## Files
 
 - `.claude-plugin/plugin.json` - the manifest, including the `maxQueryChars`
-  option
+  and `autoOpen` options
 - `.claude-plugin/marketplace.json` - makes this repository a marketplace
   listing the mod, so it installs with one line
 - `hooks/hooks.json` - names the hooks module
