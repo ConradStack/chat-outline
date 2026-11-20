@@ -78,22 +78,38 @@ The Outline pane opens when a session starts. If you close it, type
 | --- | --- | --- | --- |
 | `maxQueryChars` | whole number, 1 or more | 1000 | Prompts longer than this are cut off in the outline |
 
-In the terminal the option is a row in the config menu. Elsewhere, set it in
-`~/.claude/settings.json` under `pluginConfigs`, keyed by the plugin's name:
+Leaving it unset is fine: the outline then uses the default. To change it,
+pick one of these:
 
-```json
-{
-    "pluginConfigs": {
-        "chat-outline": {
-            "options": { "maxQueryChars": 500 }
-        }
-    }
-}
-```
+- At the prompt of a terminal session:
 
-A plugin loaded with `--plugin-dir` or `CLAUDE_CODE_PLUGIN_DIRS` may be keyed
-as `chat-outline@inline` instead. If the value is not a positive whole
-number, the pane shows an error instead of the outline.
+  ```
+  /plugin configure chat-outline@chat-outline
+  ```
+
+- When installing, pass the value with `--config`:
+
+  ```bash
+  claude plugin install chat-outline --marketplace ConradStack/chat-outline --config maxQueryChars=500
+  ```
+
+- Edit `~/.claude/settings.json`. An installed copy is keyed by its plugin id,
+  `chat-outline@chat-outline`:
+
+  ```json
+  {
+      "pluginConfigs": {
+          "chat-outline@chat-outline": {
+              "options": { "maxQueryChars": 500 }
+          }
+      }
+  }
+  ```
+
+A copy loaded from a local folder with `--plugin-dir` or
+`CLAUDE_CODE_PLUGIN_DIRS` is not installed, and may be keyed as
+`chat-outline@inline` instead. If the value is not a positive whole number,
+the pane shows an error instead of the outline.
 
 ## Limitations
 
