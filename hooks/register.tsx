@@ -46,6 +46,19 @@ const maxCharsFrom = (raw: unknown): number | { error: string } => {
     return { error: `maxQueryChars must be a positive whole number, got ${JSON.stringify(raw)}` }
 }
 
+// The `autoOpen` option: whether the pane opens when a session starts; true
+// when unset. Anything else is reported in the pane, not replaced.
+const autoOpenFrom = (raw: unknown): boolean | { error: string } => {
+    if (raw === undefined) {
+        return true
+    }
+    if (typeof raw === 'boolean') {
+        return raw
+    }
+
+    return { error: `autoOpen must be true or false, got ${JSON.stringify(raw)}` }
+}
+
 // Row timestamps, read from the session's transcript file (JSONL, one row per
 // line, each with `uuid` and `timestamp`). Read incrementally: only the bytes
 // added since the last read, up to the last complete line.
@@ -118,6 +131,7 @@ const formatStamp = (iso: string, now: Date): string => {
 
 export const register: Register = (on, options) => {
     const maxChars = maxCharsFrom(options['maxQueryChars'])
+    const autoOpen = autoOpenFrom(options['autoOpen'])
 
     on('session.start', async ($, e, next) => {
         await $.command.register({
@@ -125,7 +139,10 @@ export const register: Register = (on, options) => {
             description: 'Show the conversation outline pane',
         })
         const started = await next(e)
-        void $.ui.open({ id: PANE, title: TITLE })
+        // An invalid value opens the pane too, so the error it draws is seen.
+        if (autoOpen !== false) {
+            void $.ui.open({ id: PANE, title: TITLE })
+        }
 
         return started
     })
@@ -163,6 +180,9 @@ export const register: Register = (on, options) => {
         const { Box, Text } = $.ui.resolve(e)
         await read($, revision)
 
+        if (typeof autoOpen !== 'boolean') {
+            return <Text color="red">{autoOpen.error}</Text>
+        }
         if (typeof maxChars !== 'number') {
             return <Text color="red">{maxChars.error}</Text>
         }

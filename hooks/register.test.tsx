@@ -1,5 +1,6 @@
 import { expect, test } from 'claude-code/testing'
 import type { SessionMessage } from 'claude-code'
+import type { TestBody } from 'claude-code/testing'
 
 const PANE = {
     plugin: 'chat-outline',
@@ -58,4 +59,29 @@ test('an empty conversation says so', async ($, on) => {
 
     expect((await ui.find({ type: 'Text' }))?.text).toBe('No prompts yet.')
     await ui.unmount()
+})
+
+const startAndCountOpens = async (
+    $: Parameters<TestBody>[0],
+    on: Parameters<TestBody>[1],
+): Promise<number> => {
+    let opens = 0
+    on('command.register', () => ({ value: { command: 'outline' } }))
+    on('ui.open', () => {
+        opens += 1
+
+        return { value: { isPlaced: true } }
+    })
+    on('session.start', (_, e) => ({ cwd: e.cwd }))
+    await $.session.start({ cwd: '/', surface: 'desktop', isInteractive: true })
+
+    return opens
+}
+
+test('opens the pane at session start by default', async ($, on) => {
+    expect(await startAndCountOpens($, on)).toBe(1)
+})
+
+test('does not open the pane at session start with autoOpen off', { options: { autoOpen: false } }, async ($, on) => {
+    expect(await startAndCountOpens($, on)).toBe(0)
 })

@@ -1,6 +1,6 @@
 {
     "name": "chat-outline",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Outline pane listing each prompt of the conversation, with its time",
     "types": "./types/index.d.ts",
     "userConfig": {
@@ -10,6 +10,12 @@
             "description": "Prompts longer than this are cut off in the outline",
             "default": 1000,
             "min": 1
+        },
+        "autoOpen": {
+            "type": "boolean",
+            "title": "Open the outline at session start",
+            "description": "When off, the pane opens only when you run /outline",
+            "default": true
         }
     }
 }

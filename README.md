@@ -69,17 +69,19 @@ macOS and Linux).
 
 ## Using it
 
-The Outline pane opens when a session starts. If you close it, type
-`/outline` to open it again.
+The Outline pane opens when a session starts, unless you turn `autoOpen`
+off (see Settings). If you close it, or it was not opened, type `/outline`
+to open it.
 
 ## Settings
 
 | Option | Type | Default | What it does |
 | --- | --- | --- | --- |
 | `maxQueryChars` | whole number, 1 or more | 1000 | Prompts longer than this are cut off in the outline |
+| `autoOpen` | `true` or `false` | `true` | Whether the pane opens when a session starts; when `false`, run `/outline` to open it |
 
-Leaving it unset is fine: the outline then uses the default. To change it,
-pick one of these:
+Leaving an option unset is fine: the outline then uses its default. To
+change one, pick one of these:
 
 - At the prompt of a terminal session:
 
@@ -100,7 +102,7 @@ pick one of these:
   {
       "pluginConfigs": {
           "chat-outline@chat-outline": {
-              "options": { "maxQueryChars": 500 }
+              "options": { "maxQueryChars": 500, "autoOpen": false }
           }
       }
   }
@@ -108,8 +110,9 @@ pick one of these:
 
 A copy loaded from a local folder with `--plugin-dir` or
 `CLAUDE_CODE_PLUGIN_DIRS` is not installed, and may be keyed as
-`chat-outline@inline` instead. If the value is not a positive whole number,
-the pane shows an error instead of the outline.
+`chat-outline@inline` instead. If an option holds a value of the wrong kind,
+the pane shows an error instead of the outline (and opens at session start
+so the error is seen).
 
 ## Limitations
 
